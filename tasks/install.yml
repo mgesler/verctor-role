@@ -1,0 +1,14 @@
+---
+- name: Vector Install package for CentOS
+  become: true
+  ansible.builtin.yum:
+    name: "{{ vector_url_rpm }}"
+    state: present
+    disable_gpg_check: true
+  when: ansible_distribution == "CentOS"
+
+- name: Vector Install package for Ubuntu
+  become: true
+  ansible.builtin.apt:
+    deb: "{{ vector_url_deb }}"
+  when: ansible_distribution == "Ubuntu"
